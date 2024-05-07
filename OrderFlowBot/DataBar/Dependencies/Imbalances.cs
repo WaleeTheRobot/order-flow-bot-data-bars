@@ -141,6 +141,9 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar.Dependencies
             int stackedImbalance = OrderFlowBotDataBarConfig.StackedImbalance;
             double tickSize = OrderFlowBotDataBarConfig.TickSize;
 
+            this.BidStackedImbalances.Clear();
+            this.AskStackedImbalances.Clear();
+
             ProcessStackedImbalances(bidImbalancePriceList, stackedImbalance, tickSize, isBid: true);
             ProcessStackedImbalances(askImbalancePriceList, stackedImbalance, tickSize, isBid: false);
         }

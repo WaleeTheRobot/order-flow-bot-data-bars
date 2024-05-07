@@ -11,6 +11,12 @@ namespace NinjaTrader.NinjaScript.Strategies
             Print(string.Format("{0}", ToDay(Time[0])));
             Print(string.Format("Time: {0}", dataBar.Time));
             Print(string.Format("Bar Number: {0}", dataBar.BarNumber));
+            Print(string.Format("Volume: {0}", dataBar.Volumes.Volume));
+
+            Print(string.Format("Bid Imbalances: {0}", dataBar.Imbalances.BidImbalances.Count));
+            Print(string.Format("Ask Imbalances: {0}", dataBar.Imbalances.AskImbalances.Count));
+            Print(string.Format("Bid Stacked Imbalances: {0}", dataBar.Imbalances.BidStackedImbalances.Count));
+            Print(string.Format("Ask Stacked Imbalances: {0}", dataBar.Imbalances.AskStackedImbalances.Count));
 
             /*
             Print(string.Format("Bar Type: {0}", dataBar.BarType));
@@ -20,18 +26,20 @@ namespace NinjaTrader.NinjaScript.Strategies
             Print(string.Format("Open: {0}", dataBar.Prices.Open));
             Print(string.Format("Close: {0}", dataBar.Prices.Close));
 
-            Print(string.Format("Volume: {0}", dataBar.Volumes.Volume));
             
+
             Print(string.Format("BuyingVolume: {0}", dataBar.Volumes.BuyingVolume));
             Print(string.Format("AskSinglePrint: {0}", dataBar.Volumes.HasAskSinglePrint));
             Print(string.Format("BidSinglePrint: {0}", dataBar.Volumes.HasBidSinglePrint));
             Print(string.Format("SellingVolume: {0}", dataBar.Volumes.SellingVolume));
             Print(string.Format("PointOfControl: {0}", dataBar.Volumes.PointOfControl));
+
+            Print("Bid/Ask Volume Per Bar:");
             foreach (var kvp in dataBar.Volumes.BidAskVolumes)
             {
                 Print(string.Format("{0} : {1}", kvp.BidVolume, kvp.AskVolume));
             }
-            
+
             Print(string.Format("Value Area High: {0}", dataBar.Volumes.ValueAreaHighPrice));
             Print(string.Format("Value Area Low: {0}", dataBar.Volumes.ValueAreaLowPrice));
 
@@ -50,6 +58,7 @@ namespace NinjaTrader.NinjaScript.Strategies
             Print(string.Format("MinMax Delta %: {0}", dataBar.Deltas.MinMaxDeltaRatio));
             Print(string.Format("MaxMin Delta %: {0}", dataBar.Deltas.MaxMinDeltaRatio));
             Print(string.Format("Delta Change: {0}", dataBar.Deltas.DeltaChange));
+            
 
             Print("Bid Imbalances");
             Print("[");
@@ -65,6 +74,22 @@ namespace NinjaTrader.NinjaScript.Strategies
                 Print(string.Format("{0} : {1}", kvp.Price, kvp.Volume));
             }
             Print("]");
+
+            Print("Stacked Bid Imbalances");
+            Print("[");
+            foreach (var kvp in dataBar.Imbalances.BidStackedImbalances)
+            {
+                Print(string.Format("{0} : {1}", kvp.Price, kvp.Volume));
+            }
+            Print("]");
+            Print("Stacked Ask Imbalances");
+            Print("[");
+            foreach (var kvp in dataBar.Imbalances.AskStackedImbalances)
+            {
+                Print(string.Format("{0} : {1}", kvp.Price, kvp.Volume));
+            }
+            Print("]");
+
             
             Print(string.Format("Current ATR: {0}", dataBar.ATR.Current));
             Print(string.Format("Previous Median ATR: {0}", dataBar.ATR.Median));
