@@ -16,11 +16,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
         public double ValidAbsorptionRatio { get; set; }
         public int ValidVolumeSequencing { get; set; }
         public long ValidVolumeSequencingMinimumVolume { get; set; }
-        public int ATRPeriod { get; set; }
-        public double ATRMultiplier { get; set; }
-        public int ATRMedianPeriod { get; set; }
-        public double ATRRangePercentage { get; set; }
-
     }
 
     public static class OrderFlowBotDataBarConfig
@@ -34,10 +29,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
         public static double ValidAbsorptionRatio { get; private set; }
         public static int ValidVolumeSequencing { get; private set; }
         public static long ValidVolumeSequencingMinimumVolume { get; private set; }
-        public static int ATRPeriod { get; private set; }
-        public static double ATRMultiplier { get; private set; }
-        public static int ATRMedianPeriod { get; private set; }
-        public static double ATRRangePercentage { get; private set; }
 
         public static void Initialize(OrderFlowBotDataBarConfigValues config)
         {
@@ -50,10 +41,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
             ValidAbsorptionRatio = config.ValidAbsorptionRatio;
             ValidVolumeSequencing = config.ValidVolumeSequencing;
             ValidVolumeSequencingMinimumVolume = config.ValidVolumeSequencingMinimumVolume;
-            ATRPeriod = config.ATRPeriod;
-            ATRMultiplier = config.ATRMultiplier;
-            ATRMedianPeriod = config.ATRMedianPeriod;
-            ATRRangePercentage = config.ATRRangePercentage;
         }
     }
 
@@ -67,8 +54,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
         public double Low { get; set; }
         public double Open { get; set; }
         public double Close { get; set; }
-        public List<double> ATRList { get; set; }
-        public double ATRCurrent { get; set; }
 
         public OrderFlowDataBarBase()
         {
@@ -80,8 +65,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
             Low = 0;
             Open = 0;
             Close = 0;
-            ATRList = new List<double>();
-            ATRCurrent = 0;
         }
     }
 
@@ -90,15 +73,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
         private OrderFlowDataBarBase _baseBar { get; set; }
         public List<OrderFlowBotDataBar> Bars { get; set; }
         public OrderFlowBotDataBar Bar { get; set; }
-        public Persistent Persistent { get; set; }
-
-        public OrderFlowBotDataBars()
-        {
-            _baseBar = new OrderFlowDataBarBase();
-            Bars = new List<OrderFlowBotDataBar>();
-            Bar = new OrderFlowBotDataBar();
-            Persistent = new Persistent();
-        }
 
         public OrderFlowBotDataBars(OrderFlowBotDataBarConfigValues configValues)
         {
@@ -107,7 +81,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
             _baseBar = new OrderFlowDataBarBase();
             Bars = new List<OrderFlowBotDataBar>();
             Bar = new OrderFlowBotDataBar();
-            Persistent = new Persistent();
         }
 
         public void SetOrderFlowDataBarBase(OrderFlowDataBarBase baseBar)
@@ -126,7 +99,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
             PopulatePrices();
             PopulateVolumeAndImbalances();
             PopulateDeltas();
-            PopulateATR();
         }
 
         public void UpdateDataBars()
@@ -209,13 +181,6 @@ namespace NinjaTrader.Custom.AddOns.OrderFlowBot.DataBar
             Bar.Deltas.MinMaxDeltaRatio = CalculateRatio(Math.Abs(minDelta), Math.Abs(maxDelta));
             Bar.Deltas.MaxMinDeltaRatio = CalculateRatio(Math.Abs(maxDelta), Math.Abs(minDelta));
             Bar.Deltas.DeltaChange = volumes.BarDelta - _baseBar.VolumetricBar.Volumes[_baseBar.CurrentBar - _baseBar.BarsAgo - 1].BarDelta;
-        }
-
-        private void PopulateATR()
-        {
-            Bar.ATR.Current = _baseBar.ATRCurrent;
-            Bar.ATR.SetMedianATR(_baseBar.ATRList);
-            Bar.ATR.SetPrices(Bar.Prices.High, Bar.Prices.Low);
         }
 
         private double CalculateRatio(double numerator, double denominator)

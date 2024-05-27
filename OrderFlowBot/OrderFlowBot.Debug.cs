@@ -11,14 +11,17 @@ namespace NinjaTrader.NinjaScript.Strategies
             Print(string.Format("{0}", ToDay(Time[0])));
             Print(string.Format("Time: {0}", dataBar.Time));
             Print(string.Format("Bar Number: {0}", dataBar.BarNumber));
+
+            /*
             Print(string.Format("Volume: {0}", dataBar.Volumes.Volume));
 
+            
             Print(string.Format("Bid Imbalances: {0}", dataBar.Imbalances.BidImbalances.Count));
             Print(string.Format("Ask Imbalances: {0}", dataBar.Imbalances.AskImbalances.Count));
             Print(string.Format("Bid Stacked Imbalances: {0}", dataBar.Imbalances.BidStackedImbalances.Count));
             Print(string.Format("Ask Stacked Imbalances: {0}", dataBar.Imbalances.AskStackedImbalances.Count));
 
-            /*
+            
             Print(string.Format("Bar Type: {0}", dataBar.BarType));
 
             Print(string.Format("High: {0}", dataBar.Prices.High));
@@ -90,14 +93,6 @@ namespace NinjaTrader.NinjaScript.Strategies
             }
             Print("]");
 
-            
-            Print(string.Format("Current ATR: {0}", dataBar.ATR.Current));
-            Print(string.Format("Previous Median ATR: {0}", dataBar.ATR.Median));
-            Print(string.Format("HighPlusMedianATR ATR: {0}", dataBar.ATR.HighPlusMedianATR));
-            Print(string.Format("LowMinusMedianATR ATR: {0}", dataBar.ATR.LowMinusMedianATR));
-            Print(string.Format("HighLowMedianATR ATR: {0}", dataBar.ATR.HighLowMedianATR));
-            Print(string.Format("UpperRange ATR: {0}", dataBar.ATR.UpperRange));
-            Print(string.Format("LowerRange ATR: {0}", dataBar.ATR.LowerRange));
             */
 
             Print("\n");

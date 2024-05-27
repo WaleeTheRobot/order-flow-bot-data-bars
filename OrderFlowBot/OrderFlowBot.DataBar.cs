@@ -20,30 +20,10 @@ namespace NinjaTrader.NinjaScript.Strategies
                 High = High[barsAgo],
                 Low = Low[barsAgo],
                 Open = Open[barsAgo],
-                Close = Close[barsAgo]
+                Close = Close[barsAgo],
             };
 
-            PopulateBaseATR(baseBar);
-
             return baseBar;
-        }
-
-        private void PopulateBaseATR(OrderFlowDataBarBase baseBar)
-        {
-            if (CurrentBar < ATRPeriod)
-            {
-                return;
-            }
-
-            List<double> atrs = new List<double>();
-
-            for (int i = 0; i < ATRMedianPeriod; i++)
-            {
-                atrs.Add(Math.Round(ATR(ATRPeriod)[i], 2));
-            }
-
-            baseBar.ATRList = atrs;
-            baseBar.ATRCurrent = Math.Round(ATR(ATRPeriod)[baseBar.BarsAgo], 2);
         }
     }
 }

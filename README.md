@@ -34,6 +34,7 @@ DataBar properties
 ```
 #region DataBar Properties
 
+[NinjaScriptProperty]
 [Display(Name = "Min Look Back Bars", Description = "The minimum bars to look back. This should be equal to or higher than and period to look back", Order = 0, GroupName = GroupConstants.GROUP_NAME_DATA_BAR)]
 public int MinLookBackBars { get; set; }
 
@@ -65,22 +66,6 @@ public int ValidVolumeSequencing { get; set; }
 [Display(Name = "Valid Volume Sequencing Minimum Volume", Description = "The valid number of volume to check for volume sequencing.", Order = 7, GroupName = GroupConstants.GROUP_NAME_DATA_BAR)]
 public long ValidVolumeSequencingMinimumVolume { get; set; }
 
-[NinjaScriptProperty]
-[Display(Name = "ATR", Description = "The ATR period.", Order = 8, GroupName = GroupConstants.GROUP_NAME_DATA_BAR)]
-public int ATRPeriod { get; set; }
-
-[NinjaScriptProperty]
-[Display(Name = "ATR Multiplier", Description = "The ATR multiplier.", Order = 9, GroupName = GroupConstants.GROUP_NAME_DATA_BAR)]
-public double ATRMultiplier { get; set; }
-
-[NinjaScriptProperty]
-[Display(Name = "ATR Median Period", Description = "The ATR median period to calculate.", Order = 10, GroupName = GroupConstants.GROUP_NAME_DATA_BAR)]
-public int ATRMedianPeriod { get; set; }
-
-[NinjaScriptProperty]
-[Display(Name = "ATR Range Percentage", Description = "The ATR range for the upper and lower ranges.", Order = 11, GroupName = GroupConstants.GROUP_NAME_DATA_BAR)]
-public double ATRRangePercentage { get; set; }
-
 #endregion
 ```
 
@@ -100,11 +85,7 @@ else if (State == State.DataLoaded)
             ValidExhaustionRatio = ValidExhaustionRatio,
             ValidAbsorptionRatio = ValidAbsorptionRatio,
             ValidVolumeSequencing = ValidVolumeSequencing,
-            ValidVolumeSequencingMinimumVolume = ValidVolumeSequencingMinimumVolume,
-            ATRPeriod = ATRPeriod,
-            ATRMultiplier = ATRMultiplier,
-            ATRMedianPeriod = ATRMedianPeriod,
-            ATRRangePercentage = ATRRangePercentage
+            ValidVolumeSequencingMinimumVolume = ValidVolumeSequencingMinimumVolume
         }
     );
 }
@@ -126,10 +107,6 @@ if (State == State.SetDefaults)
     ValidAbsorptionRatio = 1.4;
     ValidVolumeSequencing = 4;
     ValidVolumeSequencingMinimumVolume = 500;
-    ATRPeriod = 14;
-    ATRMultiplier = 1;
-    ATRMedianPeriod = 4;
-    ATRRangePercentage = 20;
 }
 ```
 
